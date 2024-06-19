@@ -8,7 +8,7 @@ import Header from '@/app/components/Header';
 import Drawer from './components/Drawer';
 
 import mockList from '@/app/mocks/list';
-import { Bomb } from '@/app/types/Bomb';
+import { Bomb, Position } from '@/app/types/Bomb';
 
 type PageProps = {
   params: {
@@ -23,34 +23,37 @@ export default function Page({ params }: PageProps) {
   const mapSelected = mockList.find((map) => map.name === params.map) || mockList[0];
 
   const [circlePositions, setCirclePositions] = useState<Bomb[]>(mapSelected.bombs);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [mapPosition, setMapPosition] = useState<Position>();
 
   const handleClose = () => setIsOpen(false);
+  const handleOpen = (position: Position) => {
+    setIsOpen(true);
+    setMapPosition(position);
+  };
 
   const draw = () => {
     console.log(circlePositions);
   };
 
   const addSmoke = () => {
-    setCirclePositions((prevPositions) => [...prevPositions, { type: 'smoke', cx: 50, cy: 50 }]);
+    setCirclePositions((prevPositions) => [
+      ...prevPositions,
+      { type: 'smoke', cx: 50, cy: 50, positions: [] },
+    ]);
   };
 
-  const drawSmoke = (svg: any, bomb: Bomb) =>
+  const drawSmoke = (svg: any, bomb: Bomb) => {
     svg
       .append('image')
       .attr('xlink:href', '/images/bombs/smoke-tr.svg')
       .attr('x', bomb.cx - 15)
       .attr('y', bomb.cy - 15)
       .attr('width', 30)
-      .attr('height', 30);
-  // svg
-  //   .append('circle')
-  //   .attr('cx', bomb.cx)
-  //   .attr('cy', bomb.cy)
-  //   .attr('r', 15)
-  //   .style('fill', 'purple')
-  //   .style('zIndex', '10');
-
+      .attr('height', 30)
+      .style('cursor', 'pointer')
+      .on('click', () => handleOpen(bomb));
+  };
   useEffect(() => {
     if (!SVGWrapperRefElement.current) return;
 
@@ -68,7 +71,7 @@ export default function Page({ params }: PageProps) {
       .style('background-size', 'contain');
 
     circlePositions.forEach((bomb, index) => {
-      const circle = drawSmoke(svg, bomb);
+      const circle = drawSmoke(svg, bomb) as any;
 
       const drag = d3.drag().on('drag', (event) => {
         const newCx = event.x;
@@ -77,12 +80,12 @@ export default function Page({ params }: PageProps) {
 
         setCirclePositions((prevPositions) => {
           const updatedPositions = [...prevPositions];
-          updatedPositions[index] = { type: 'smoke', cx: newCx, cy: newCy };
+          updatedPositions[index] = { type: 'smoke', cx: newCx, cy: newCy, positions: [] };
           return updatedPositions;
         });
       });
 
-      circle.call(drag as any);
+      circle?.call(drag as any);
     });
 
     return () => {
@@ -110,7 +113,12 @@ export default function Page({ params }: PageProps) {
           </div>
         </div>
 
-        <Drawer positionsList={mapSelected.bombs} isOpen={isOpen} handleClose={handleClose} />
+        <Drawer
+          mapPosition={mapPosition}
+          positionsList={mapSelected.bombs}
+          isOpen={isOpen}
+          handleClose={handleClose}
+        />
       </Card>
     </main>
   );

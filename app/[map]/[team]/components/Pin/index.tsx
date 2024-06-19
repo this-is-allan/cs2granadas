@@ -6,7 +6,7 @@ type CardProps = {
   left: number;
 };
 
-export default function Pin({ left, top }: CardProps) {
+const Pin = ({ left, top }: CardProps) => {
   return (
     // <div className="absolute left-[350px] top-[200px] cursor-pointer rounded-full">
     <div
@@ -17,4 +17,6 @@ export default function Pin({ left, top }: CardProps) {
       <Image src={`/images/bombs/smoke-ct.svg`} height={30} width={30} alt="" />
     </div>
   );
-}
+};
+
+export default Pin;

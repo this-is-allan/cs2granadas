@@ -4,6 +4,12 @@ export type Bomb = {
   thumb?: string;
   cx: number;
   cy: number;
+  positions: Position[];
+};
+
+export type Position = {
+  title?: string;
+  thumb?: string;
 };
 
 export type Map = {
