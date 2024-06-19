@@ -1,11 +1,14 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+
 import * as d3 from 'd3';
 
 import Card from '@/app/components/Card';
 import Header from '@/app/components/Header';
+import Drawer from './components/Drawer';
 
 import mockList from '@/app/mocks/list';
+import { Bomb } from '@/app/types/Bomb';
 
 type PageProps = {
   params: {
@@ -14,25 +17,22 @@ type PageProps = {
   };
 };
 
-type Bomb = {
-  name?: string;
-  cx: number;
-  cy: number;
-};
-
 export default function Page({ params }: PageProps) {
   const SVGWrapperRefElement = useRef(null);
 
   const mapSelected = mockList.find((map) => map.name === params.map) || mockList[0];
 
-  const [circlePositions, setCirclePositions] = useState(mapSelected.bombs);
+  const [circlePositions, setCirclePositions] = useState<Bomb[]>(mapSelected.bombs);
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleClose = () => setIsOpen(false);
 
   const draw = () => {
     console.log(circlePositions);
   };
 
   const addSmoke = () => {
-    setCirclePositions((prevPositions) => [...prevPositions, { name: 'smoke', cx: 50, cy: 50 }]);
+    setCirclePositions((prevPositions) => [...prevPositions, { type: 'smoke', cx: 50, cy: 50 }]);
   };
 
   const drawSmoke = (svg: any, bomb: Bomb) =>
@@ -77,7 +77,7 @@ export default function Page({ params }: PageProps) {
 
         setCirclePositions((prevPositions) => {
           const updatedPositions = [...prevPositions];
-          updatedPositions[index] = { name: 'smoke', cx: newCx, cy: newCy };
+          updatedPositions[index] = { type: 'smoke', cx: newCx, cy: newCy };
           return updatedPositions;
         });
       });
@@ -88,7 +88,7 @@ export default function Page({ params }: PageProps) {
     return () => {
       svg.remove();
     };
-  }, [mapSelected.name, circlePositions]);
+  }, [circlePositions]);
 
   return (
     <main className="relative flex flex-col items-center justify-between p-24">
@@ -97,12 +97,20 @@ export default function Page({ params }: PageProps) {
         <div className="flex gap-6">
           <button onClick={addSmoke}>Adicionar smoke</button>
           <button onClick={draw}>Gerar</button>
+          <button
+            className="rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={() => setIsOpen(true)}
+          >
+            Abrir drawer
+          </button>
         </div>
         <div className="relative">
           <div className="h-[700px] w-full">
             <div ref={SVGWrapperRefElement} />
           </div>
         </div>
+
+        <Drawer positionsList={mapSelected.bombs} isOpen={isOpen} handleClose={handleClose} />
       </Card>
     </main>
   );

@@ -5,34 +5,22 @@ const list = [
     map: '/images/maps/inferno.webp',
     bombs: [
       {
-        name: 'smoke',
+        id: 1,
+        type: 'smoke',
+        title: 'Fonte',
         cx: 340,
         cy: 186,
+        thumb:
+          'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
       },
       {
-        name: 'smoke',
+        id: 2,
+        type: 'smoke',
+        title: 'Banana',
         cx: 424,
         cy: 151,
-      },
-      {
-        name: 'smoke',
-        cx: 354,
-        cy: 79,
-      },
-      {
-        name: 'smoke',
-        cx: 743,
-        cy: 427,
-      },
-      {
-        name: 'smoke',
-        cx: 741,
-        cy: 538,
-      },
-      {
-        name: 'smoke',
-        cx: 302,
-        cy: 183,
+        thumb:
+          'https://steamuserimages-a.akamaihd.net/ugc/2024986142286489744/031EE29FBC1D00576A8CFB36AAFB7E5594894862/',
       },
     ],
   },
