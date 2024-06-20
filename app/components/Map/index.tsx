@@ -1,40 +1,36 @@
-'use client';
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import Card from '@/app/components/Card';
-import mockList from '@/app/mocks/list';
+
+import EditMode from './EditMode';
+import ViewMode from './ViewMode';
+
 import { Bomb, Position, Side } from '@/app/types/Bomb';
-import Drawer from '@/app/[map]/[team]/components/Drawer';
+import mockList from '@/app/mocks/list';
 
 type MapProps = {
+  mode: 'edit' | 'view';
   map: string;
   side: Side;
 };
 
-const Map = ({ map, side }: MapProps) => {
+const Map = ({ mode, side, map }: MapProps) => {
   const SVGWrapperRefElement = useRef(null);
 
   const mapSelected = mockList.find((map) => map.name === map.map) || mockList[0];
 
-  const [circlePositions, setCirclePositions] = useState<Bomb[]>(mapSelected.bombs as Bomb[]);
   const [isOpen, setIsOpen] = useState(false);
   const [mapPosition, setMapPosition] = useState<Position>();
+  const [circlePositions, setCirclePositions] = useState<Bomb[]>(mapSelected.bombs as Bomb[]);
 
   const handleClose = () => setIsOpen(false);
-  const handleOpen = (position: Position) => {
-    setIsOpen(true);
-    setMapPosition(position);
-  };
 
-  const generate = () => {
+  const handleGenerate = () => {
     console.log(circlePositions);
   };
 
-  const addSmoke = () => {
-    setCirclePositions((prevPositions) => [
-      ...prevPositions,
-      { type: 'smoke', cx: 50, cy: 50, positions: [] },
-    ]);
+  const handleOpen = (position: Position) => {
+    setIsOpen(true);
+    setMapPosition(position);
   };
 
   const drawSmoke = (svg: any, bomb: Bomb) => {
@@ -66,7 +62,15 @@ const Map = ({ map, side }: MapProps) => {
         setCirclePositions(updatedPositions);
       });
 
-    smokeImage.call(dragHandler);
+    if (mode === 'edit') smokeImage.call(dragHandler);
+    if (mode === 'view') smokeImage.call(() => handleOpen);
+  };
+
+  const handleAddSmoke = () => {
+    setCirclePositions((prevPositions) => [
+      ...prevPositions,
+      { type: 'smoke', cx: 50, cy: 50, positions: [] },
+    ]);
   };
 
   useEffect(() => {
@@ -94,25 +98,31 @@ const Map = ({ map, side }: MapProps) => {
     };
   }, [circlePositions]);
 
-  return (
-    <Card>
-      <div className="flex gap-6">
-        <button onClick={addSmoke}>Adicionar smoke</button>
-        <button onClick={generate}>Gerar</button>
-      </div>
-      <div className="relative">
-        <div className="h-[700px] w-full">
-          <div ref={SVGWrapperRefElement} />
-        </div>
-      </div>
+  console.log(mapSelected.bombs);
 
-      <Drawer
-        mapPosition={mapPosition}
-        positionsList={mapSelected.bombs as Bomb[]}
-        isOpen={isOpen}
-        handleClose={handleClose}
-      />
-    </Card>
+  return (
+    <>
+      {mode === 'edit' && (
+        <EditMode
+          refElement={SVGWrapperRefElement}
+          mapPosition={mapPosition}
+          mapSelected={mapSelected}
+          isOpen={isOpen}
+          onGenerate={handleGenerate}
+          onClose={handleClose}
+          onAddSmoke={handleAddSmoke}
+        />
+      )}
+      {mode === 'view' && (
+        <ViewMode
+          refElement={SVGWrapperRefElement}
+          mapPosition={mapPosition}
+          mapSelected={mapSelected}
+          isOpen={isOpen}
+          onClose={handleClose}
+        />
+      )}
+    </>
   );
 };
 

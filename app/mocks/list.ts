@@ -7,8 +7,8 @@ const list = [
       {
         type: 'smoke',
         title: 'Fonte',
-        cx: 340,
-        cy: 186,
+        cx: 400,
+        cy: 209,
         thumb:
           'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
         positions: [
@@ -29,8 +29,8 @@ const list = [
       {
         type: 'smoke',
         title: 'Banana',
-        cx: 424,
-        cy: 151,
+        cx: 437,
+        cy: 156,
         thumb:
           'https://steamuserimages-a.akamaihd.net/ugc/2024986142286489744/031EE29FBC1D00576A8CFB36AAFB7E5594894862/',
         positions: [
