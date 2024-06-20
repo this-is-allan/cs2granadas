@@ -1,5 +1,5 @@
 import { Bomb, Position } from '@/app/types/Bomb';
-import { Card, Drawer as DrawerFlow } from 'flowbite-react';
+import { Drawer as DrawerFlow } from 'flowbite-react';
 import PositionCard from './components/PositionCard';
 
 type DrawerProps = {
@@ -19,7 +19,7 @@ const Drawer = ({ mapPosition, positionsList, isOpen, handleClose }: DrawerProps
       <DrawerFlow.Items>
         <div className="space-y-5">
           {positionSelected?.positions.map((position) => (
-            <PositionCard key={position.title} thumb={position.thumb!} title={position.title!} />
+            <PositionCard key={position.title} position={position} />
           ))}
         </div>
       </DrawerFlow.Items>

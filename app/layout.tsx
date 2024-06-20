@@ -29,6 +29,15 @@ const customTheme: CustomFlowbiteTheme = {
       base: 'flex rounded-lg border shadow-md border-[#26282D] bg-[#13151B]',
     },
   },
+  modal: {
+    content: {
+      base: 'relative h-full w-full p-4 md:h-auto',
+      inner: 'relative flex max-h-[90dvh] flex-col rounded-lg bg-gray-700 shadow',
+    },
+    body: {
+      base: 'flex-1 overflow-auto text-white',
+    },
+  },
 };
 
 export default function RootLayout({

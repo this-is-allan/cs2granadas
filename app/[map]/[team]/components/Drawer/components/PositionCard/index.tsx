@@ -1,20 +1,36 @@
-import { Bomb, Position } from '@/app/types/Bomb';
-import { Card, Drawer as DrawerFlow } from 'flowbite-react';
+import { Position } from '@/app/types/Bomb';
+import { Modal, Button, Card, Drawer as DrawerFlow } from 'flowbite-react';
+import { useState } from 'react';
+import VideoPlayerModal from '../VideoPlayerModal';
 
 type DrawerProps = {
-  title: string;
-  thumb: string;
+  position: Position;
 };
 
-const PositionCard = ({ title, thumb }: DrawerProps) => {
+const PositionCard = ({ position }: DrawerProps) => {
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenPositionCard = () => setOpenModal(true);
+  const handleClosePositionCard = () => setOpenModal(false);
+
   return (
-    <Card
-      className="max-w-sm"
-      imgAlt="Meaningful alt text for an image that is not purely decorative"
-      imgSrc={thumb}
-    >
-      <h5 className="text-xl font-bold tracking-tight text-gray-900 text-white">{title}</h5>
-    </Card>
+    <>
+      <Card
+        className="max-w-sm cursor-pointer"
+        imgSrc={position.thumb}
+        onClick={handleOpenPositionCard}
+      >
+        <h5 className="text-xl font-bold tracking-tight text-gray-900 text-white">
+          {position.title}
+        </h5>
+      </Card>
+
+      <VideoPlayerModal
+        position={position}
+        openModal={openModal}
+        onCloseModal={handleClosePositionCard}
+      />
+    </>
   );
 };
 
