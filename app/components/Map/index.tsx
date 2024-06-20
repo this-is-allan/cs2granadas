@@ -4,7 +4,7 @@ import * as d3 from 'd3';
 import EditMode from './EditMode';
 import ViewMode from './ViewMode';
 
-import { Bomb, Position, Side } from '@/app/types/Bomb';
+import { Bomb, BombType, Position, Side } from '@/app/types/Bomb';
 import mockList from '@/app/mocks/list';
 
 type MapProps = {
@@ -33,12 +33,31 @@ const Map = ({ mode, side, map }: MapProps) => {
     setMapPosition(position);
   };
 
-  const smokePin = () => {
-    switch (side) {
-      case 'tr':
-        return '/images/bombs/smoke-tr.svg';
-      case 'ct':
-        return '/images/bombs/smoke-ct.svg';
+  const grenadePin = (bombType: BombType) => {
+    if (side === 'ct') {
+      switch (bombType) {
+        case 'smoke':
+          return '/images/bombs/smoke-ct.svg';
+        case 'fire':
+          return '/images/bombs/fire-ct.svg';
+        case 'he':
+          return '/images/bombs/he-ct.svg';
+        case 'flash':
+          return '/images/bombs/flash-ct.svg';
+      }
+    }
+
+    if (side === 'tr') {
+      switch (bombType) {
+        case 'smoke':
+          return '/images/bombs/smoke-tr.svg';
+        case 'fire':
+          return '/images/bombs/fire-tr.svg';
+        case 'he':
+          return '/images/bombs/he-tr.svg';
+        case 'flash':
+          return '/images/bombs/flash-tr.svg';
+      }
     }
   };
 
@@ -47,7 +66,7 @@ const Map = ({ mode, side, map }: MapProps) => {
 
     const smokeImage = svg
       .append('image')
-      .attr('xlink:href', smokePin)
+      .attr('xlink:href', () => grenadePin(bomb.type!))
       .attr('x', bomb.cx - 15)
       .attr('y', bomb.cy - 15)
       .attr('width', 30)

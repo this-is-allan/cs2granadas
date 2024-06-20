@@ -1,5 +1,5 @@
 export type Bomb = {
-  type?: string;
+  type?: BombType;
   title?: string;
   side?: Side;
   thumb?: string;
@@ -7,6 +7,8 @@ export type Bomb = {
   cy: number;
   positions: Position[];
 };
+
+export type BombType = 'smoke' | 'fire' | 'flash' | 'he';
 
 export type Position = {
   title?: string;

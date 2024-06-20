@@ -50,6 +50,57 @@ const list = [
           },
         ],
       },
+      {
+        type: 'fire',
+        title: 'Caixão',
+        side: 'tr',
+        cx: 362,
+        cy: 91.5,
+        thumb:
+          'https://steamuserimages-a.akamaihd.net/ugc/2024986142286489744/031EE29FBC1D00576A8CFB36AAFB7E5594894862/',
+        positions: [
+          {
+            title: 'Banana',
+            side: 'tr',
+            thumb:
+              'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
+          },
+        ],
+      },
+      {
+        type: 'flash',
+        title: 'Boca do meio',
+        side: 'tr',
+        cx: 485,
+        cy: 489.5,
+        thumb:
+          'https://steamuserimages-a.akamaihd.net/ugc/2024986142286489744/031EE29FBC1D00576A8CFB36AAFB7E5594894862/',
+        positions: [
+          {
+            title: 'Banana',
+            side: 'tr',
+            thumb:
+              'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
+          },
+        ],
+      },
+      {
+        type: 'he',
+        title: 'Cabecinha',
+        side: 'tr',
+        cx: 369,
+        cy: 188.5,
+        thumb:
+          'https://steamuserimages-a.akamaihd.net/ugc/2024986142286489744/031EE29FBC1D00576A8CFB36AAFB7E5594894862/',
+        positions: [
+          {
+            title: 'Banana',
+            side: 'tr',
+            thumb:
+              'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
+          },
+        ],
+      },
     ],
   },
   {
