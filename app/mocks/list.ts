@@ -14,11 +14,13 @@ const list = [
         positions: [
           {
             title: 'Banana 1',
+            side: 'tr',
             thumb:
               'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
           },
           {
             title: 'Barrio 1',
+            side: 'tr',
             thumb:
               'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
           },
@@ -34,11 +36,13 @@ const list = [
         positions: [
           {
             title: 'Banana 2',
+            side: 'ct',
             thumb:
               'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
           },
           {
             title: 'Barrio 2',
+            side: 'ct',
             thumb:
               'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
           },

@@ -38,6 +38,12 @@ const customTheme: CustomFlowbiteTheme = {
       base: 'flex-1 overflow-auto text-white',
     },
   },
+  button: {
+    color: {
+      tr: 'bg-[#e38717] text-white hover:bg-[#c16b0f]',
+      ct: 'bg-[#2c6ea4] text-white hover:bg-[#1e4a6f]',
+    },
+  },
 };
 
 export default function RootLayout({
@@ -48,7 +54,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Flowbite theme={{ theme: customTheme }}>{children}</Flowbite>
+        <Flowbite theme={{ theme: customTheme }}>
+          <div className="mt-4 px-24">{children}</div>
+        </Flowbite>
       </body>
     </html>
   );

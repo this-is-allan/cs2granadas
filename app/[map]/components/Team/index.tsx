@@ -7,7 +7,7 @@ type TeamProps = {
 
 export default function Team({ map }: TeamProps) {
   return (
-    <div className="flex justify-center space-x-6">
+    <div className="flex justify-center">
       <Link href={`${map}/tr`}>
         <div className="cursor-pointer space-y-4 text-center">
           <Image
@@ -25,7 +25,7 @@ export default function Team({ map }: TeamProps) {
         <div className="cursor-pointer space-y-4 text-center">
           <Image
             src="/images/ct.jpeg"
-            alt="terroristas"
+            alt="contra-terroristas"
             height={300}
             width={280}
             className="rounded border-4 border-gray-500 hover:border-blue-600"

@@ -1,6 +1,11 @@
-import Card from '../components/Card';
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+
+import Filters from '../components/Filters';
 import Header from '../components/Header';
-import Team from './components/Team';
+import Map from '../components/Map';
+import { Side } from '../types/Bomb';
 
 type PageProps = {
   params: {
@@ -9,12 +14,19 @@ type PageProps = {
 };
 
 export default function Page({ params }: PageProps) {
+  const searchParams = useSearchParams();
+
+  const side = searchParams.get('side') as Side;
+
   return (
-    <main className="flex flex-col items-center justify-between p-24">
+    <main>
       <Header />
-      <Card>
-        <Team map={params.map} />
-      </Card>
+      <div className="mt-6">
+        <Filters />
+      </div>
+      <div className="mt-6">
+        <Map map={params.map} side={side || 'tr'} />
+      </div>
     </main>
   );
 }

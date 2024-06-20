@@ -1,26 +1,20 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-
 import * as d3 from 'd3';
-
 import Card from '@/app/components/Card';
-import Header from '@/app/components/Header';
-import Drawer from './components/Drawer';
-
 import mockList from '@/app/mocks/list';
-import { Bomb, Position } from '@/app/types/Bomb';
+import { Bomb, Position, Side } from '@/app/types/Bomb';
+import Drawer from '@/app/[map]/[team]/components/Drawer';
 
-type PageProps = {
-  params: {
-    map: string;
-    team: string;
-  };
+type MapProps = {
+  map: string;
+  side: Side;
 };
 
-export default function Page({ params }: PageProps) {
+const Map = ({ map, side }: MapProps) => {
   const SVGWrapperRefElement = useRef(null);
 
-  const mapSelected = mockList.find((map) => map.name === params.map) || mockList[0];
+  const mapSelected = mockList.find((map) => map.name === map.map) || mockList[0];
 
   const [circlePositions, setCirclePositions] = useState<Bomb[]>(mapSelected.bombs as Bomb[]);
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +26,7 @@ export default function Page({ params }: PageProps) {
     setMapPosition(position);
   };
 
-  const draw = () => {
+  const generate = () => {
     console.log(circlePositions);
   };
 
@@ -44,7 +38,7 @@ export default function Page({ params }: PageProps) {
   };
 
   const drawSmoke = (svg: any, bomb: Bomb) => {
-    svg
+    const smokeImage = svg
       .append('image')
       .attr('xlink:href', '/images/bombs/smoke-tr.svg')
       .attr('x', bomb.cx - 15)
@@ -53,7 +47,28 @@ export default function Page({ params }: PageProps) {
       .attr('height', 30)
       .style('cursor', 'pointer')
       .on('click', () => handleOpen(bomb));
+
+    const dragHandler = d3
+      .drag()
+      .on('start', (event: any, d: any) => {
+        d3.select(event.sourceEvent.target).raise().attr('stroke', 'black');
+      })
+      .on('drag', (event: any, d: any) => {
+        const x = event.x;
+        const y = event.y;
+        smokeImage.attr('x', x - 15).attr('y', y - 15);
+      })
+      .on('end', (event: any, d: any) => {
+        d3.select(event.sourceEvent.target).attr('stroke', null);
+        const updatedPositions = circlePositions.map((pos) =>
+          pos === bomb ? { ...pos, cx: event.x, cy: event.y } : pos,
+        );
+        setCirclePositions(updatedPositions);
+      });
+
+    smokeImage.call(dragHandler);
   };
+
   useEffect(() => {
     if (!SVGWrapperRefElement.current) return;
 
@@ -70,22 +85,8 @@ export default function Page({ params }: PageProps) {
       .attr('height', '100%')
       .style('background-size', 'contain');
 
-    circlePositions.forEach((bomb, index) => {
-      const circle = drawSmoke(svg, bomb) as any;
-
-      const drag = d3.drag().on('drag', (event) => {
-        const newCx = event.x;
-        const newCy = event.y;
-        d3.select(event.sourceEvent.target).attr('cx', newCx).attr('cy', newCy);
-
-        setCirclePositions((prevPositions) => {
-          const updatedPositions = [...prevPositions];
-          updatedPositions[index] = { type: 'smoke', cx: newCx, cy: newCy, positions: [] };
-          return updatedPositions;
-        });
-      });
-
-      circle?.call(drag as any);
+    circlePositions.forEach((bomb) => {
+      drawSmoke(svg, bomb);
     });
 
     return () => {
@@ -94,26 +95,25 @@ export default function Page({ params }: PageProps) {
   }, [circlePositions]);
 
   return (
-    <main className="relative flex flex-col items-center justify-between p-24">
-      <Header />
-      <Card>
-        <div className="flex gap-6">
-          <button onClick={addSmoke}>Adicionar smoke</button>
-          <button onClick={draw}>Gerar</button>
+    <Card>
+      <div className="flex gap-6">
+        <button onClick={addSmoke}>Adicionar smoke</button>
+        <button onClick={generate}>Gerar</button>
+      </div>
+      <div className="relative">
+        <div className="h-[700px] w-full">
+          <div ref={SVGWrapperRefElement} />
         </div>
-        <div className="relative">
-          <div className="h-[700px] w-full">
-            <div ref={SVGWrapperRefElement} />
-          </div>
-        </div>
+      </div>
 
-        <Drawer
-          mapPosition={mapPosition}
-          positionsList={mapSelected.bombs as Bomb[]}
-          isOpen={isOpen}
-          handleClose={handleClose}
-        />
-      </Card>
-    </main>
+      <Drawer
+        mapPosition={mapPosition}
+        positionsList={mapSelected.bombs as Bomb[]}
+        isOpen={isOpen}
+        handleClose={handleClose}
+      />
+    </Card>
   );
-}
+};
+
+export default Map;

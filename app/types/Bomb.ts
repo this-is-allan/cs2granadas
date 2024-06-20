@@ -10,6 +10,7 @@ export type Bomb = {
 export type Position = {
   title?: string;
   thumb?: string;
+  side?: Side;
 };
 
 export type Map = {
@@ -23,3 +24,5 @@ export type Team = {
   name: string;
   icon: string;
 };
+
+export type Side = 'tr' | 'ct';
