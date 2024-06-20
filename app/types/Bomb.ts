@@ -1,6 +1,7 @@
 export type Bomb = {
   type?: string;
   title?: string;
+  side?: Side;
   thumb?: string;
   cx: number;
   cy: number;

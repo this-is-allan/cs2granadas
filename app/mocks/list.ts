@@ -6,7 +6,8 @@ const list = [
     bombs: [
       {
         type: 'smoke',
-        title: 'Fonte',
+        title: 'Passagem da Banana',
+        side: 'ct',
         cx: 400,
         cy: 209,
         thumb:
@@ -28,7 +29,8 @@ const list = [
       },
       {
         type: 'smoke',
-        title: 'Banana',
+        title: 'Passagem CT',
+        side: 'tr',
         cx: 437,
         cy: 156,
         thumb:
@@ -36,13 +38,13 @@ const list = [
         positions: [
           {
             title: 'Banana 2',
-            side: 'ct',
+            side: 'tr',
             thumb:
               'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
           },
           {
             title: 'Barrio 2',
-            side: 'ct',
+            side: 'tr',
             thumb:
               'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
           },

@@ -33,10 +33,21 @@ const Map = ({ mode, side, map }: MapProps) => {
     setMapPosition(position);
   };
 
+  const smokePin = () => {
+    switch (side) {
+      case 'tr':
+        return '/images/bombs/smoke-tr.svg';
+      case 'ct':
+        return '/images/bombs/smoke-ct.svg';
+    }
+  };
+
   const drawSmoke = (svg: any, bomb: Bomb) => {
+    if (bomb.side !== side) return;
+
     const smokeImage = svg
       .append('image')
-      .attr('xlink:href', '/images/bombs/smoke-tr.svg')
+      .attr('xlink:href', smokePin)
       .attr('x', bomb.cx - 15)
       .attr('y', bomb.cy - 15)
       .attr('width', 30)
@@ -96,9 +107,7 @@ const Map = ({ mode, side, map }: MapProps) => {
     return () => {
       svg.remove();
     };
-  }, [circlePositions]);
-
-  console.log(mapSelected.bombs);
+  }, [circlePositions, side]);
 
   return (
     <>
