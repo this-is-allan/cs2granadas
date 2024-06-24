@@ -25,7 +25,7 @@ export default function Page({ params }: PageProps) {
         <Filters />
       </div>
       <div className="mt-6">
-        <Map mode="edit" map={params.map} side={side || 'tr'} />
+        <Map mode="view" map={params.map} side={side || 'tr'} />
       </div>
     </main>
   );

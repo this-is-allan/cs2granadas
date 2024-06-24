@@ -21,6 +21,7 @@ const ViewMode = ({ refElement, mapPosition, mapSelected, isOpen, onClose }: Map
       </div>
 
       <Drawer
+        mapSelected={mapSelected}
         mapPosition={mapPosition}
         positionsList={mapSelected.bombs as Bomb[]}
         isOpen={isOpen}

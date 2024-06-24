@@ -19,7 +19,7 @@ const Map = ({ mode, side, map }: MapProps) => {
   const mapSelected = mockList.find((map) => map.name === map.map) || mockList[0];
 
   const [isOpen, setIsOpen] = useState(false);
-  const [mapPosition, setMapPosition] = useState<Position>();
+  const [mapPosition, setMapPosition] = useState<Bomb>();
   const [circlePositions, setCirclePositions] = useState<Bomb[]>(mapSelected.bombs as Bomb[]);
 
   const handleClose = () => setIsOpen(false);
@@ -28,7 +28,7 @@ const Map = ({ mode, side, map }: MapProps) => {
     console.log(circlePositions);
   };
 
-  const handleOpen = (position: Position) => {
+  const handleOpen = (position: Bomb) => {
     setIsOpen(true);
     setMapPosition(position);
   };

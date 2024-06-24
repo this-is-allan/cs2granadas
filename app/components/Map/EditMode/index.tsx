@@ -36,6 +36,7 @@ const EditMode = ({
       </div>
 
       <Drawer
+        mapSelected={mapSelected}
         mapPosition={mapPosition}
         positionsList={mapSelected.bombs as Bomb[]}
         isOpen={isOpen}

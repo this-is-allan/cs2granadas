@@ -1,15 +1,16 @@
-import { Bomb, Position } from '@/app/types/Bomb';
+import type { Bomb, Position, Map } from '@/app/types/Bomb';
 import { Drawer as DrawerFlow } from 'flowbite-react';
 import PositionCard from './components/PositionCard';
 
 type DrawerProps = {
+  mapSelected?: Map;
   mapPosition?: Position;
   positionsList: Bomb[];
   isOpen: boolean;
   handleClose: () => void;
 };
 
-const Drawer = ({ mapPosition, positionsList, isOpen, handleClose }: DrawerProps) => {
+const Drawer = ({ mapSelected, mapPosition, positionsList, isOpen, handleClose }: DrawerProps) => {
   const positionSelected = positionsList.find((position) => position.title === mapPosition?.title);
 
   return (
@@ -19,7 +20,7 @@ const Drawer = ({ mapPosition, positionsList, isOpen, handleClose }: DrawerProps
       <DrawerFlow.Items>
         <div className="space-y-5">
           {positionSelected?.positions.map((position) => (
-            <PositionCard key={position.title} position={position} />
+            <PositionCard key={position.title} position={position} mapSelected={mapSelected!} />
           ))}
         </div>
       </DrawerFlow.Items>

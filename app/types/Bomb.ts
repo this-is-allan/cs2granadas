@@ -12,8 +12,11 @@ export type BombType = 'smoke' | 'fire' | 'flash' | 'he';
 
 export type Position = {
   title?: string;
-  thumb?: string;
   side?: Side;
+  video: {
+    filename: string;
+    thumb: string;
+  };
 };
 
 export type Map = {

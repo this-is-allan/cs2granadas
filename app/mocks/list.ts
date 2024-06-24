@@ -14,22 +14,18 @@ const list = [
           'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
         positions: [
           {
-            title: 'Banana 1',
-            side: 'tr',
-            thumb:
-              'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
-          },
-          {
-            title: 'Barrio 1',
-            side: 'tr',
-            thumb:
-              'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
+            title: 'Passagem da banana',
+            side: 'ct',
+            video: {
+              filename: 'de_inferno_passagem_banana.mp4',
+              thumb: 'de_inferno_passagem_banana.png',
+            },
           },
         ],
       },
       {
         type: 'smoke',
-        title: 'Passagem CT',
+        title: 'Passagem Base CT',
         side: 'tr',
         cx: 437,
         cy: 156,
@@ -37,67 +33,31 @@ const list = [
           'https://steamuserimages-a.akamaihd.net/ugc/2024986142286489744/031EE29FBC1D00576A8CFB36AAFB7E5594894862/',
         positions: [
           {
-            title: 'Banana 2',
+            title: 'Banana',
             side: 'tr',
-            thumb:
-              'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
-          },
-          {
-            title: 'Barrio 2',
-            side: 'tr',
-            thumb:
-              'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
+            video: {
+              filename: 'de_inferno_passagem_base_ct.mp4',
+              thumb: 'de_inferno_passagem_base_ct.png',
+            },
           },
         ],
       },
       {
-        type: 'fire',
+        type: 'smoke',
         title: 'Caixão',
         side: 'tr',
-        cx: 362,
-        cy: 91.5,
+        cx: 357,
+        cy: 88,
         thumb:
           'https://steamuserimages-a.akamaihd.net/ugc/2024986142286489744/031EE29FBC1D00576A8CFB36AAFB7E5594894862/',
         positions: [
           {
             title: 'Banana',
             side: 'tr',
-            thumb:
-              'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
-          },
-        ],
-      },
-      {
-        type: 'flash',
-        title: 'Boca do meio',
-        side: 'tr',
-        cx: 485,
-        cy: 489.5,
-        thumb:
-          'https://steamuserimages-a.akamaihd.net/ugc/2024986142286489744/031EE29FBC1D00576A8CFB36AAFB7E5594894862/',
-        positions: [
-          {
-            title: 'Banana',
-            side: 'tr',
-            thumb:
-              'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
-          },
-        ],
-      },
-      {
-        type: 'he',
-        title: 'Cabecinha',
-        side: 'tr',
-        cx: 369,
-        cy: 188.5,
-        thumb:
-          'https://steamuserimages-a.akamaihd.net/ugc/2024986142286489744/031EE29FBC1D00576A8CFB36AAFB7E5594894862/',
-        positions: [
-          {
-            title: 'Banana',
-            side: 'tr',
-            thumb:
-              'https://steamuserimages-a.akamaihd.net/ugc/2091416298281308694/7A2B54F2D674677B264441AC5DD6FB354F1E4F1A/',
+            video: {
+              filename: 'de_inferno_caixao.mp4',
+              thumb: 'de_inferno_caixao.png',
+            },
           },
         ],
       },
